@@ -10,6 +10,7 @@
 		Heading3,
 		Italic,
 		List,
+		ListOrdered,
 		MoreHorizontal,
 		Pilcrow,
 		Quote,
@@ -26,7 +27,8 @@
 		editor = new Editor({
 			editorProps: {
 				attributes: {
-					class: 'h-full w-full m-0 outline-none selection:bg-chrysler-500/20'
+					class:
+						'wysiwyg dark:wysiwyg-invert wysiwyg-sm tablet:wysiwyg tablet:dark:wysiwyg-invert w-full max-w-none h-full p-6 bg-black/5 dark:bg-white/5 tablet:rounded-3xl m-0 outline-none selection:bg-chrysler-500/20 dark:selection:bg-chrysler-500'
 				}
 			},
 			element: editorInterface,
@@ -39,7 +41,7 @@
 			],
 			content: '',
 			editable: true,
-			injectCSS: true,
+			injectCSS: false,
 			onTransaction: () => {
 				// force re-render so `editor.isActive` works as expected
 				editor = editor;
@@ -59,7 +61,7 @@
 	});
 </script>
 
-<div class="z-50 w-full max-w-2xl h-full border-x-2 border-black/10 dark:border-white/10">
+<div class="z-50 w-full max-w-[40rem] h-full tablet:pb-3">
 	<div class="w-full h-full flex flex-col overflow-hidden">
 		<header class="w-full p-6 flex flex-row justify-between items-center sticky top-0">
 			<div class="w-full px-3 py-6 flex justify-start items-center gap-4" aria-label="Tilde logo">
@@ -72,11 +74,11 @@
 				<MoreHorizontal />
 			</button>
 		</header>
-		<main class="w-full h-full flex flex-col overflow-hidden">
+		<main class="w-full h-full flex flex-col justify-center items-start overflow-hidden">
 			{#if editor}
 				<div
 					id="editor-controls"
-					class="px-6 py-3 flex flex-row justify-start items-center gap-2 border-b-2 border-black/10 dark:border-white/10 overflow-y-hidden overflow-x-auto sticky top-0"
+					class=" w-full px-6 py-3 flex flex-row justify-start items-center gap-2 overflow-y-hidden overflow-x-auto sticky top-0"
 				>
 					<button
 						class="button"
@@ -120,9 +122,6 @@
 					>
 						<Italic />
 					</button>
-					<button class="button">
-						<Underline />
-					</button>
 					<button
 						class="button"
 						on:click={() => editor.chain().focus().toggleStrike().run()}
@@ -140,15 +139,26 @@
 					>
 						<Code />
 					</button>
-					<button class="button">
+					<button
+						class="button"
+						on:click={() => editor.chain().focus().toggleBulletList().run()}
+						class:active={editor.isActive('bulletList')}
+					>
 						<List />
+					</button>
+					<button
+						class="button"
+						on:click={() => editor.chain().focus().toggleOrderedList().run()}
+						class:active={editor.isActive('orderedList')}
+					>
+						<ListOrdered />
 					</button>
 				</div>
 			{/if}
 
 			<div
 				id="editor-interface"
-				class="w-full h-full p-6 overflow-y-auto"
+				class="w-full h-full flex justify-center items-center overflow-y-auto"
 				bind:this={editorInterface}
 			/>
 		</main>
