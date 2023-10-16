@@ -1,11 +1,16 @@
 <script lang="ts">
-	import Editor from '$lib/components/editor/Editor.svelte';
+	import { goto } from '$app/navigation';
+	import { onMount } from 'svelte';
+
+	onMount(() => {
+		setTimeout(() => {
+			goto('/app/edit');
+		}, 1000);
+	});
 </script>
 
 <svelte:head>
 	<title>Tilde</title>
 </svelte:head>
 
-<div class="w-full h-full flex justify-center items-center">
-	<Editor />
-</div>
+<div />
