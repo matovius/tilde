@@ -4,7 +4,7 @@
 </script>
 
 <svelte:head>
-	<title>Tilde</title>
+	<title>Tilde: Your favorite online text editor</title>
 </svelte:head>
 
 <div class="w-full h-full overflow-y-auto px-6 flex flex-col justify-between items-center">
@@ -16,7 +16,7 @@
 		</div>
 		<h1 class="text-center text-6xl font-bold">Welcome to Tilde</h1>
 		<h2 class="text-center text-4xl font-medium text-black/60 dark:text-white/60">
-			Your favorite web-based scratchpad
+			Your favorite web-based text editor.
 		</h2>
 		<a
 			href="/app"
