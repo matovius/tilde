@@ -29,7 +29,7 @@
 	<footer class="w-full max-w-[720px] py-6 flex justify-center items-center">
 		<span class="text-center text-xs font-medium">
 			Tilde is currently only available as a demo. Read more about what this means
-			<a href="#availability" class="link text-chrysler-500">here</a>.
+			<a href="/availability" class="link text-chrysler-500">here</a>.
 		</span>
 	</footer>
 </div>
