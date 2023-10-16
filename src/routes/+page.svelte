@@ -7,7 +7,7 @@
 	<title>Tilde</title>
 </svelte:head>
 
-<div class="w-full h-full overflow-y-auto px-9 flex flex-col justify-between items-center">
+<div class="w-full h-full overflow-y-auto px-6 flex flex-col justify-between items-center">
 	<main
 		class="w-full max-w-[720px] flex flex-col justify-start items-center gap-8 tablet:gap-16 pt-6 tablet:pt-[120px]"
 	>
