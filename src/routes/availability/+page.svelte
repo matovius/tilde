@@ -6,11 +6,11 @@
 	<title>Tilde's Availability</title>
 </svelte:head>
 
-<div class="w-full h-full flex justify-center items-center p-3">
+<div class="w-full h-full overflow-y-auto flex justify-center items-start">
 	<div
 		class="w-full max-w-[640px] wysiwyg dark:wysiwyg-invert wysiwyg-sm tablet:wysiwyg tablet:dark:wysiwyg-invert p-6 selection:bg-chrysler-500/20 dark:selection:bg-chrysler-500"
 	>
-		<div class="w-full flex justify-center items-center not-wysiwyg pb-12">
+		<div class="w-full flex justify-center items-center not-wysiwyg py-12">
 			<div class="w-24 h-24 aspect-square">
 				<TildeLogo />
 			</div>
