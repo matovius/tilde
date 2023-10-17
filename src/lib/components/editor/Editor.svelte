@@ -5,9 +5,11 @@
 	import {
 		Bold,
 		Code,
+		CornerUpRight,
 		Heading1,
 		Heading2,
 		Heading3,
+		Info,
 		Italic,
 		List,
 		ListOrdered,
@@ -15,7 +17,7 @@
 		Pilcrow,
 		Quote,
 		Strikethrough,
-		Underline
+		Trash
 	} from 'lucide-svelte';
 	import TildeLogo from '../TildeLogo.svelte';
 
@@ -28,7 +30,7 @@
 			editorProps: {
 				attributes: {
 					class:
-						'wysiwyg dark:wysiwyg-invert wysiwyg-sm tablet:wysiwyg tablet:dark:wysiwyg-invert w-full max-w-none h-full p-6 bg-black/5 dark:bg-white/5 m-0 outline-none selection:bg-chrysler-500/20 dark:selection:bg-chrysler-500'
+						'wysiwyg dark:wysiwyg-invert wysiwyg-sm tablet:wysiwyg tablet:dark:wysiwyg-invert w-full max-w-none h-full m-0 outline-none selection:bg-chrysler-500/20 dark:selection:bg-chrysler-500'
 				}
 			},
 			element: editorInterface,
@@ -64,7 +66,7 @@
 	});
 </script>
 
-<div class="z-50 w-full max-w-4xl h-full">
+<div class="z-50 w-full max-w-5xl h-full">
 	<div
 		class="w-full h-full flex flex-col tablet:flex-row tablet:justify-center tablet:items-center overflow-hidden"
 	>
@@ -81,7 +83,7 @@
 			{#if editor}
 				<div
 					id="editor-controls"
-					class="w-full tablet:h-full p-2 flex flex-row tablet:flex-col justify-start items-center laptop:items-start gap-1 overflow-y-hidden tablet:overflow-y-auto overflow-x-auto tablet:overflow-x-hidden sticky top-0"
+					class="w-full tablet:h-full p-2 flex flex-row tablet:flex-col justify-start items-center laptop:items-start gap-1 overflow-y-hidden tablet:overflow-y-auto overflow-x-auto tablet:overflow-x-hidden"
 				>
 					<button
 						class="button"
@@ -169,18 +171,39 @@
 					</button>
 				</div>
 			{/if}
-
-			<button class="button">
-				<MoreHorizontal />
-				<span class="sr-only laptop:not-sr-only">More Options</span>
-			</button>
 		</header>
+
 		<main class="w-full h-full flex flex-col justify-center items-start overflow-hidden">
 			<div
 				id="editor-interface"
-				class="w-full h-full flex justify-center items-center overflow-y-auto"
+				class="w-full h-full p-6 flex justify-center items-center overflow-y-auto bg-black/5 dark:bg-white/5"
 				bind:this={editorInterface}
 			/>
 		</main>
+
+		<footer
+			class="w-full tablet:w-fit tablet:h-full p-3 flex flex-row tablet:flex-col justify-start items-center gap-3"
+		>
+			{#if editor}
+				<div
+					id="more-options"
+					class="w-full tablet:h-full flex flex-row tablet:flex-col justify-start items-center laptop:items-start gap-1 overflow-y-hidden tablet:overflow-y-auto overflow-x-auto tablet:overflow-x-hidden"
+				>
+					<button class="button">
+						<Info />
+						<span class="sr-only laptop:not-sr-only">Guide</span>
+					</button>
+
+					<button class="button">
+						<CornerUpRight />
+						<span class="sr-only laptop:not-sr-only">Share</span>
+					</button>
+					<button class="button">
+						<Trash />
+						<span class="sr-only laptop:not-sr-only">Discard</span>
+					</button>
+				</div>
+			{/if}
+		</footer>
 	</div>
 </div>
