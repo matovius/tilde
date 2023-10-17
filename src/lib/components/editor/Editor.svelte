@@ -28,7 +28,7 @@
 			editorProps: {
 				attributes: {
 					class:
-						'wysiwyg dark:wysiwyg-invert wysiwyg-sm tablet:wysiwyg tablet:dark:wysiwyg-invert w-full max-w-none h-full p-6 bg-black/5 dark:bg-white/5 tablet:rounded-3xl m-0 outline-none selection:bg-chrysler-500/20 dark:selection:bg-chrysler-500'
+						'wysiwyg dark:wysiwyg-invert wysiwyg-sm tablet:wysiwyg tablet:dark:wysiwyg-invert w-full max-w-none h-full p-6 bg-black/5 dark:bg-white/5 m-0 outline-none selection:bg-chrysler-500/20 dark:selection:bg-chrysler-500'
 				}
 			},
 			element: editorInterface,
@@ -39,7 +39,10 @@
 					}
 				})
 			],
-			content: '',
+			content: `
+				<h1>Welcome to Tilde</h1>
+				<p>You can type anything you want here...</p>
+			`,
 			editable: true,
 			injectCSS: false,
 			onTransaction: () => {
@@ -61,24 +64,24 @@
 	});
 </script>
 
-<div class="z-50 w-full max-w-[40rem] h-full tablet:pb-3">
-	<div class="w-full h-full flex flex-col overflow-hidden">
-		<header class="w-full p-6 flex flex-row justify-between items-center sticky top-0">
-			<div class="w-full px-3 py-6 flex justify-start items-center gap-4" aria-label="Tilde logo">
-				<div class="w-9 h-9" aria-hidden="true">
+<div class="z-50 w-full max-w-4xl h-full">
+	<div
+		class="w-full h-full flex flex-col tablet:flex-row tablet:justify-center tablet:items-center overflow-hidden"
+	>
+		<header
+			class="w-full tablet:w-fit tablet:h-full p-3 flex flex-row tablet:flex-col justify-start items-center gap-3 sticky top-0"
+		>
+			<div class="w-fit flex flex-row justify-center items-center gap-3">
+				<div class="w-9 h-9" aria-label="Tilde logo">
 					<TildeLogo />
 				</div>
-				<span class="font-bold text-xl text-start">Tilde</span>
+				<span class="sr-only laptop:not-sr-only text-xl font-bold">Tilde</span>
 			</div>
-			<button class="button">
-				<MoreHorizontal />
-			</button>
-		</header>
-		<main class="w-full h-full flex flex-col justify-center items-start overflow-hidden">
+
 			{#if editor}
 				<div
 					id="editor-controls"
-					class=" w-full px-6 py-3 flex flex-row justify-start items-center gap-2 overflow-y-hidden overflow-x-auto sticky top-0"
+					class="w-full tablet:h-full p-2 flex flex-row tablet:flex-col justify-start items-center laptop:items-start gap-1 overflow-y-hidden tablet:overflow-y-auto overflow-x-auto tablet:overflow-x-hidden sticky top-0"
 				>
 					<button
 						class="button"
@@ -86,6 +89,7 @@
 						class:active={editor.isActive('paragraph')}
 					>
 						<Pilcrow />
+						<span class="sr-only laptop:not-sr-only">Paragraph</span>
 					</button>
 					<button
 						class="button"
@@ -93,6 +97,7 @@
 						class:active={editor.isActive('heading', { level: 1 })}
 					>
 						<Heading1 />
+						<span class="sr-only laptop:not-sr-only">Heading 1</span>
 					</button>
 					<button
 						class="button"
@@ -100,6 +105,7 @@
 						class:active={editor.isActive('heading', { level: 2 })}
 					>
 						<Heading2 />
+						<span class="sr-only laptop:not-sr-only">Heading 2</span>
 					</button>
 					<button
 						class="button"
@@ -107,6 +113,7 @@
 						class:active={editor.isActive('heading', { level: 3 })}
 					>
 						<Heading3 />
+						<span class="sr-only laptop:not-sr-only">Heading 3</span>
 					</button>
 					<button
 						class="button"
@@ -114,6 +121,7 @@
 						class:active={editor.isActive('bold')}
 					>
 						<Bold />
+						<span class="sr-only laptop:not-sr-only">Bold</span>
 					</button>
 					<button
 						class="button"
@@ -121,6 +129,7 @@
 						class:active={editor.isActive('italic')}
 					>
 						<Italic />
+						<span class="sr-only laptop:not-sr-only">Italic</span>
 					</button>
 					<button
 						class="button"
@@ -128,9 +137,11 @@
 						class:active={editor.isActive('strike')}
 					>
 						<Strikethrough />
+						<span class="sr-only laptop:not-sr-only">Strikethrough</span>
 					</button>
 					<button class="button">
 						<Quote />
+						<span class="sr-only laptop:not-sr-only">Quote</span>
 					</button>
 					<button
 						class="button"
@@ -138,6 +149,7 @@
 						class:active={editor.isActive('code')}
 					>
 						<Code />
+						<span class="sr-only laptop:not-sr-only">Code</span>
 					</button>
 					<button
 						class="button"
@@ -145,6 +157,7 @@
 						class:active={editor.isActive('bulletList')}
 					>
 						<List />
+						<span class="sr-only laptop:not-sr-only">Bullet List</span>
 					</button>
 					<button
 						class="button"
@@ -152,10 +165,17 @@
 						class:active={editor.isActive('orderedList')}
 					>
 						<ListOrdered />
+						<span class="sr-only laptop:not-sr-only">Numbered List</span>
 					</button>
 				</div>
 			{/if}
 
+			<button class="button">
+				<MoreHorizontal />
+				<span class="sr-only laptop:not-sr-only">More Options</span>
+			</button>
+		</header>
+		<main class="w-full h-full flex flex-col justify-center items-start overflow-hidden">
 			<div
 				id="editor-interface"
 				class="w-full h-full flex justify-center items-center overflow-y-auto"
