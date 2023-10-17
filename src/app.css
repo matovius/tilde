@@ -50,7 +50,7 @@ em {
 }
 
 .button {
-	@apply font-medium text-base no-underline flex flex-row gap-4 px-4 py-2 border-2 border-solid border-transparent rounded-lg hover:bg-black/5 dark:hover:bg-white/5 focus:bg-black/5 dark:focus:bg-white/5 cursor-pointer outline outline-2 outline-transparent focus-visible:outline-current outline-offset-2;
+	@apply font-medium text-base no-underline flex flex-row gap-2 px-2 py-1 border-2 border-solid border-transparent rounded-lg hover:bg-black/5 dark:hover:bg-white/5 cursor-pointer outline outline-2 outline-transparent focus-visible:outline-current outline-offset-2;
 }
 
 .button[data-current-page='current-page'] {
@@ -58,7 +58,7 @@ em {
 }
 
 .button.active {
-	@apply bg-black/5 dark:bg-white/5 hover:bg-black/5 dark:hover:bg-white/5 focus:bg-black/5 dark:focus:bg-white/5;
+	@apply text-chrysler-500/80 dark:text-chrysler-300;
 }
 
 .link {
