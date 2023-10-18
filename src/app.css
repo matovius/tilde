@@ -57,6 +57,10 @@ em {
 	@apply bg-black/5 dark:bg-white/5 hover:bg-black/5 dark:hover:bg-white/5 focus:bg-black/5 dark:focus:bg-white/5;
 }
 
+.button.primary {
+	@apply bg-chrysler-500 hover:bg-chrysler-500/80;
+}
+
 .button.active {
 	@apply text-chrysler-500/80 dark:text-chrysler-300;
 }
