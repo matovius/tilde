@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount, onDestroy, createEventDispatcher } from 'svelte';
-	import { Editor, type JSONContent } from '@tiptap/core';
+	import { Editor } from '@tiptap/core';
 	import StarterKit from '@tiptap/starter-kit';
 	import {
 		Bold,
@@ -13,17 +13,66 @@
 		Italic,
 		List,
 		ListOrdered,
-		MoreHorizontal,
 		Pilcrow,
 		Quote,
 		Strikethrough,
-		Trash
+		Trash,
+		X
 	} from 'lucide-svelte';
 	import TildeLogo from '../TildeLogo.svelte';
 
 	let editorInterface: HTMLElement;
 	let editor: Editor;
-	let EditorContent: JSONContent;
+	let EditorContent: string;
+
+	let guideDialog: HTMLDialogElement;
+	let guideDialogOpen: boolean = false;
+
+	function toggleGuideDialog() {
+		if (!guideDialogOpen) {
+			guideDialogOpen = true;
+			guideDialog.showModal();
+		} else {
+			guideDialog.close();
+			guideDialogOpen = false;
+		}
+	}
+
+	let discardDialog: HTMLDialogElement;
+	let discardDialogOpen: boolean = false;
+
+	function toggleDiscardDialog() {
+		if (!discardDialogOpen) {
+			discardDialogOpen = true;
+			discardDialog.showModal();
+		} else {
+			discardDialog.close();
+			discardDialogOpen = false;
+		}
+	}
+
+	let shareDialog: HTMLDialogElement;
+	let shareDialogOpen: boolean = false;
+
+	function toggleShareDialog() {
+		if (!shareDialogOpen) {
+			shareDialogOpen = true;
+			shareDialog.showModal();
+		} else {
+			shareDialog.close();
+			shareDialogOpen = false;
+		}
+	}
+
+	function getEditorContent() {
+		EditorContent = editor.getHTML();
+		console.log(EditorContent);
+	}
+
+	function discardEditorContent() {
+		editor.commands.clearContent();
+		toggleDiscardDialog();
+	}
 
 	onMount(() => {
 		editor = new Editor({
@@ -52,9 +101,7 @@
 				editor = editor;
 			},
 			onUpdate: ({ editor }) => {
-				setTimeout(() => {
-					EditorContent = editor.getJSON();
-				}, 5000);
+				EditorContent = editor.getHTML();
 			}
 		});
 	});
@@ -187,27 +234,85 @@
 			{#if editor}
 				<div
 					id="more-options"
-					class="w-full tablet:h-full flex flex-row tablet:flex-col justify-start items-center laptop:items-start gap-1 overflow-y-hidden tablet:overflow-y-auto overflow-x-auto tablet:overflow-x-hidden"
+					class="w-full tablet:h-full flex flex-row tablet:flex-col justify-start items-center laptop:items-start gap-1"
 				>
-					<div>
-						<button class="button">
+					<div class="hidden">
+						<button class="button" on:click={toggleGuideDialog}>
 							<Info />
 							<span class="sr-only laptop:not-sr-only">Guide</span>
 						</button>
+						<dialog
+							bind:this={guideDialog}
+							class="w-full max-w-lg p-3 bg-transparent backdrop:bg-black/50 backdrop:backdrop-blur"
+						>
+							<div
+								class="w-full min-h-[320px] p-3 rounded-3xl text-black/80 dark:text-white/80 bg-white dark:bg-black relative"
+							>
+								<div class="pt-3 pr-3 absolute top-0 right-0">
+									<button class="button" on:click={toggleGuideDialog}>
+										<X />
+										<span class="sr-only">Close</span>
+									</button>
+								</div>
+							</div>
+						</dialog>
 					</div>
 
 					<div>
-						<button class="button">
-							<CornerUpRight />
-							<span class="sr-only laptop:not-sr-only">Share</span>
-						</button>
-					</div>
-
-					<div>
-						<button class="button">
+						<button class="button" on:click={toggleDiscardDialog}>
 							<Trash />
 							<span class="sr-only laptop:not-sr-only">Discard</span>
 						</button>
+						<dialog
+							bind:this={discardDialog}
+							class="w-full max-w-lg p-3 bg-transparent backdrop:bg-black/50 backdrop:backdrop-blur"
+						>
+							<div
+								id="dialog-card"
+								class="w-full p-3 rounded-3xl text-black/80 dark:text-white/80 bg-white dark:bg-black relative"
+							>
+								<div class="pt-3 pr-3 absolute top-0 right-0">
+									<button class="button" on:click={toggleDiscardDialog}>
+										<X />
+										<span class="sr-only">Close</span>
+									</button>
+								</div>
+								<header class="w-full p-3">
+									<h2 class="text-xl">Discard</h2>
+								</header>
+								<main class="w-full p-3">
+									<p>Are you sure you want to discard this note?</p>
+								</main>
+								<footer class="w-full p-3 flex flex-col tablet:flex-row tablet:justify-end gap-1">
+									<button class="button" on:click={toggleDiscardDialog}>No, it's okay</button>
+									<button class="button primary" on:click={discardEditorContent}
+										>Yes, discard</button
+									>
+								</footer>
+							</div>
+						</dialog>
+					</div>
+
+					<div>
+						<button class="button" on:click={toggleShareDialog}>
+							<CornerUpRight />
+							<span class="sr-only laptop:not-sr-only">Share</span>
+						</button>
+						<dialog
+							bind:this={shareDialog}
+							class="w-full max-w-lg p-3 bg-transparent backdrop:bg-black/50 backdrop:backdrop-blur"
+						>
+							<div
+								class="w-full min-h-[320px] p-3 rounded-3xl text-black/80 dark:text-white/80 bg-white dark:bg-black relative"
+							>
+								<div class="pt-3 pr-3 absolute top-0 right-0">
+									<button class="button" on:click={toggleShareDialog}>
+										<X />
+										<span class="sr-only">Close</span>
+									</button>
+								</div>
+							</div>
+						</dialog>
 					</div>
 				</div>
 			{/if}
