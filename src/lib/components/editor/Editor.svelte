@@ -42,7 +42,7 @@
 				})
 			],
 			content: `
-				<h1>Welcome to Tilde</h1>
+				<h1>Welcome</h1>
 				<p>You can type anything you want here...</p>
 			`,
 			editable: true,
@@ -189,19 +189,26 @@
 					id="more-options"
 					class="w-full tablet:h-full flex flex-row tablet:flex-col justify-start items-center laptop:items-start gap-1 overflow-y-hidden tablet:overflow-y-auto overflow-x-auto tablet:overflow-x-hidden"
 				>
-					<button class="button">
-						<Info />
-						<span class="sr-only laptop:not-sr-only">Guide</span>
-					</button>
+					<div>
+						<button class="button">
+							<Info />
+							<span class="sr-only laptop:not-sr-only">Guide</span>
+						</button>
+					</div>
 
-					<button class="button">
-						<CornerUpRight />
-						<span class="sr-only laptop:not-sr-only">Share</span>
-					</button>
-					<button class="button">
-						<Trash />
-						<span class="sr-only laptop:not-sr-only">Discard</span>
-					</button>
+					<div>
+						<button class="button">
+							<CornerUpRight />
+							<span class="sr-only laptop:not-sr-only">Share</span>
+						</button>
+					</div>
+
+					<div>
+						<button class="button">
+							<Trash />
+							<span class="sr-only laptop:not-sr-only">Discard</span>
+						</button>
+					</div>
 				</div>
 			{/if}
 		</footer>
