@@ -18,10 +18,7 @@
 		<h2 class="text-center text-4xl font-medium text-black/60 dark:text-white/60">
 			Your favorite web-based text editor
 		</h2>
-		<a
-			href="/app"
-			class="button tablet:flex tablet:landscape:flex focus-visible:outline-black/50 dark:focus-visible:outline-white/50 focus:bg-chrysler-500 focus:text-white/80"
-		>
+		<a href="/app" class="button primary">
 			<span>Get Started</span>
 			<ArrowRight />
 		</a>
