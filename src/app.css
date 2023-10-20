@@ -45,6 +45,10 @@ em {
 	@apply isolate;
 }
 
+.bg-tilde-gradient {
+	@apply bg-gradient-to-r from-chrysler-500 to-blue-500;
+}
+
 .icon {
 	@apply w-full h-full aspect-square;
 }
