@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount, onDestroy, createEventDispatcher } from 'svelte';
-	import { Editor } from '@tiptap/core';
+	import { Editor, type JSONContent } from '@tiptap/core';
 	import StarterKit from '@tiptap/starter-kit';
 	import {
 		Bold,
@@ -23,10 +23,13 @@
 
 	let editorInterface: HTMLElement;
 	let editor: Editor;
-	let EditorContent: string;
+	let EditorContentHTML: string;
+	let EditorContentJSON: JSONContent;
 
 	let guideDialog: HTMLDialogElement;
 	let guideDialogOpen: boolean = false;
+
+	let clipboard: Clipboard;
 
 	function toggleGuideDialog() {
 		if (!guideDialogOpen) {
@@ -51,22 +54,24 @@
 		}
 	}
 
-	let shareDialog: HTMLDialogElement;
-	let shareDialogOpen: boolean = false;
+	let exportDialog: HTMLDialogElement;
+	let exportDialogOpen: boolean = false;
 
-	function toggleShareDialog() {
-		if (!shareDialogOpen) {
-			shareDialogOpen = true;
-			shareDialog.showModal();
+	function toggleExportDialog() {
+		if (!exportDialogOpen) {
+			exportDialogOpen = true;
+			exportDialog.showModal();
 		} else {
-			shareDialog.close();
-			shareDialogOpen = false;
+			exportDialog.close();
+			exportDialogOpen = false;
 		}
 	}
 
 	function getEditorContent() {
-		EditorContent = editor.getHTML();
-		console.log(EditorContent);
+		EditorContentHTML = editor.getHTML();
+		EditorContentJSON = editor.getJSON();
+		console.log('HTML: ', EditorContentHTML);
+		console.log('JSON: ', EditorContentJSON);
 	}
 
 	function discardEditorContent() {
@@ -101,7 +106,8 @@
 				editor = editor;
 			},
 			onUpdate: ({ editor }) => {
-				EditorContent = editor.getHTML();
+				EditorContentHTML = editor.getHTML();
+				EditorContentJSON = editor.getJSON();
 			}
 		});
 	});
@@ -118,7 +124,7 @@
 		class="w-full h-full flex flex-col tablet:flex-row tablet:justify-center tablet:items-center overflow-hidden"
 	>
 		<header
-			class="w-full tablet:w-fit tablet:h-full p-3 flex flex-row tablet:flex-col justify-start items-center gap-3 sticky top-0"
+			class="w-full h-fit tablet:w-fit tablet:h-full p-3 flex flex-row tablet:flex-col justify-start items-center gap-3 sticky top-0"
 		>
 			<div class="w-fit flex flex-row justify-center items-center gap-3">
 				<div class="w-9 h-9" aria-label="Tilde logo">
@@ -130,7 +136,7 @@
 			{#if editor}
 				<div
 					id="editor-controls"
-					class="w-full tablet:h-full p-2 flex flex-row tablet:flex-col justify-start items-center laptop:items-start gap-1 overflow-y-hidden tablet:overflow-y-auto overflow-x-auto tablet:overflow-x-hidden"
+					class="w-full h-full p-2 flex flex-row tablet:flex-col justify-start items-center laptop:items-start gap-1 overflow-y-hidden tablet:overflow-y-auto overflow-x-auto tablet:overflow-x-hidden"
 				>
 					<button
 						class="button"
@@ -164,6 +170,9 @@
 						<Heading3 />
 						<span class="sr-only laptop:not-sr-only">Heading 3</span>
 					</button>
+
+					<hr class="w-px h-full tablet:w-full tablet:h-px text-black/5 dark:text-white/5" />
+
 					<button
 						class="button"
 						on:click={() => editor.chain().focus().toggleBold().run()}
@@ -229,7 +238,7 @@
 		</main>
 
 		<footer
-			class="w-full tablet:w-fit tablet:h-full p-3 flex flex-row tablet:flex-col justify-start items-center gap-3"
+			class="w-full h-fit tablet:w-fit tablet:h-full p-3 flex flex-row tablet:flex-col justify-start items-center gap-3"
 		>
 			{#if editor}
 				<div
@@ -294,23 +303,40 @@
 					</div>
 
 					<div>
-						<button class="button" on:click={toggleShareDialog}>
+						<button class="button" on:click={toggleExportDialog}>
 							<CornerUpRight />
-							<span class="sr-only laptop:not-sr-only">Share</span>
+							<span class="sr-only laptop:not-sr-only">Export</span>
 						</button>
 						<dialog
-							bind:this={shareDialog}
+							bind:this={exportDialog}
 							class="w-full max-w-lg p-3 bg-transparent backdrop:bg-black/50 backdrop:backdrop-blur"
 						>
 							<div
-								class="w-full min-h-[320px] p-3 rounded-3xl text-black/80 dark:text-white/80 bg-white dark:bg-black relative"
+								class="w-full p-3 rounded-3xl text-black/80 dark:text-white/80 bg-white dark:bg-black relative"
 							>
 								<div class="pt-3 pr-3 absolute top-0 right-0">
-									<button class="button" on:click={toggleShareDialog}>
+									<button class="button" on:click={toggleExportDialog}>
 										<X />
 										<span class="sr-only">Close</span>
 									</button>
 								</div>
+								<header class="w-full p-3">
+									<h2 class="text-xl">Export</h2>
+								</header>
+								<main class="w-full p-3 flex flex-col gap-3">
+									<p>You can currently get your content as either JSON or HTML.</p>
+									<p>
+										There will eventually be support for Markdown, so be on the look-out for that.
+									</p>
+								</main>
+								<footer class="w-full p-3 flex flex-col tablet:flex-row tablet:justify-end gap-1">
+									<button class="button primary">
+										<span>Copy JSON</span>
+									</button>
+									<button class="button primary">
+										<span>Copy HTML</span>
+									</button>
+								</footer>
 							</div>
 						</dialog>
 					</div>
