@@ -12,28 +12,9 @@ export default {
 			transparent: 'transparent',
 			black: '#000000',
 			white: '#ffffff',
-			chrysler: {
-				100: '#dcd0f4',
-				200: '#b9a2e9',
-				300: '#9573df',
-				400: '#7245d4',
-				500: '#4f16c9',
-				600: '#3f12a1',
-				700: '#2f0d79',
-				800: '#200950',
-				900: '#100428'
-			},
-			blue: {
-				100: '#d0e8f4',
-				200: '#a2d1e9',
-				300: '#73bbdf',
-				400: '#45a4d4',
-				500: '#168dc9',
-				600: '#1271a1',
-				700: '#0d5579',
-				800: '#093850',
-				900: '#041c28'
-			}
+			chrysler: '#4f16c9',
+			blue: '#168dc9',
+			red: '#fe1226'
 		},
 		fontFamily: {
 			inter: ['Inter Variable', 'sans-serif'],
