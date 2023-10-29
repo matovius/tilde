@@ -20,10 +20,35 @@ export default {
 			inter: ['Inter Variable', 'sans-serif'],
 			fira: ['Fira Code Variable', 'sans-serif']
 		},
+		spacing: {
+			0: '0rem',
+			4: '.25rem',
+			8: '.5rem',
+			12: '.75rem',
+			16: '1rem',
+			20: '1.25rem',
+			24: '1.5rem',
+			28: '1.75rem',
+			32: '2rem',
+			36: '2.25rem',
+			40: '2.5rem',
+			44: '2.75rem',
+			48: '3rem',
+			52: '3.25rem',
+			56: '3.5rem',
+			60: '3.75rem',
+			64: '4rem',
+			72: '4.5rem',
+			84: '5.25rem',
+			96: '6rem',
+			120: '7.5rem',
+			144: '9rem',
+			180: '11.25rem',
+			240: '15rem'
+		},
 		extend: {}
 	},
 	extend: {
-		spacing: {},
 		typography: {
 			DEFAULT: {
 				css: {
