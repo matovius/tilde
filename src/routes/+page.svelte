@@ -18,7 +18,7 @@
 		<h2 class="text-center text-4xl font-medium text-black/60 dark:text-white/60">
 			Your favorite web-based text editor
 		</h2>
-		<a href="/app" class="button bg-tilde-gradient">
+		<a href="/app" class="button text-white bg-chrysler hover:bg-chrysler/80 focus:bg-chrysler/80">
 			<span>Get Started</span>
 			<ArrowRight />
 		</a>
