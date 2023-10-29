@@ -46,7 +46,7 @@ em {
 }
 
 .bg-tilde-gradient {
-	@apply bg-gradient-to-r from-chrysler-500 to-blue-500;
+	@apply bg-gradient-to-r from-chrysler to-blue;
 }
 
 .icon {
@@ -62,13 +62,35 @@ em {
 }
 
 .button.primary {
-	@apply bg-chrysler-500 hover:bg-chrysler-500/80;
+	@apply text-white bg-chrysler hover:bg-chrysler/80;
+}
+
+.button.danger {
+	@apply text-red;
 }
 
 .button.active {
-	@apply text-chrysler-500/80 dark:text-chrysler-300;
+	@apply text-chrysler/80;
 }
 
 .link {
 	@apply font-medium no-underline outline-dashed outline-2 outline-transparent focus-visible:outline-current outline-offset-2;
 }
+
+/*
+.ProseMirror-menubar-wrapper {
+	@apply w-full h-full;
+}
+
+.ProseMirror,
+.cm-editor {
+	@apply wysiwyg dark:wysiwyg-invert wysiwyg-sm tablet:wysiwyg tablet:dark:wysiwyg-invert w-full max-w-none h-full m-0 outline-none selection:bg-chrysler/20 dark:selection:bg-chrysler;
+}
+
+.cm-editor {
+	@apply max-h-full;
+}
+
+.cm-scroller {
+	@apply overflow-auto;
+}*/
