@@ -54,7 +54,7 @@ em {
 }
 
 .button {
-	@apply font-medium text-base no-underline flex flex-row gap-8 px-12 py-8 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 cursor-pointer outline outline-2 outline-transparent focus-visible:outline-current outline-offset-2;
+	@apply font-medium text-base no-underline flex flex-row gap-8 px-12 py-8 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 cursor-pointer outline outline-2 outline-transparent focus-visible:outline-current outline-offset-2 disabled:opacity-60 disabled:pointer-events-none disabled:touch-none;
 }
 
 .button[data-current-page='current-page'] {
@@ -62,7 +62,7 @@ em {
 }
 
 .button.primary {
-	@apply text-white bg-chrysler hover:bg-chrysler/80;
+	@apply text-white bg-chrysler hover:bg-chrysler/80 disabled:hover:bg-chrysler;
 }
 
 .button.danger {
@@ -75,6 +75,10 @@ em {
 
 .link {
 	@apply font-medium no-underline outline-dashed outline-2 outline-transparent focus-visible:outline-current outline-offset-2;
+}
+
+.input {
+	@apply w-full px-12 py-8 rounded-lg border border-black/10 hover:border-black/40 dark:border-white/10 dark:hover:border-white/40 bg-transparent outline outline-2 outline-transparent outline-offset-2 focus-visible:outline-current;
 }
 
 /*
