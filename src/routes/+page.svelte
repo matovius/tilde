@@ -34,7 +34,7 @@
 				The minimal web-based text editor
 			</h2>
 			<a
-				href="/login"
+				href="/edit"
 				class="button text-white bg-chrysler hover:bg-chrysler/80 focus:bg-chrysler/80"
 			>
 				<span>Get Started</span>
