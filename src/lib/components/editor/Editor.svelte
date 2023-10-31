@@ -106,15 +106,15 @@
 	});
 </script>
 
-<div class="z-50 w-full max-w-5xl h-full">
+<div class="w-full max-w-5xl h-full">
 	<div
 		class="w-full h-full flex flex-col tablet:flex-row tablet:justify-center tablet:items-center overflow-hidden"
 	>
 		<header
-			class="w-full h-fit tablet:w-fit tablet:h-full flex flex-row tablet:flex-col justify-start items-center sticky top-0"
+			class="w-full h-fit tablet:w-fit tablet:h-full flex flex-row tablet:flex-col justify-start items-center"
 		>
-			<div class="w-fit flex flex-row justify-center items-center gap-3 p-3">
-				<div class="w-9 h-9" aria-label="Tilde logo">
+			<div class="w-fit flex flex-row justify-center items-center gap-24 p-12">
+				<div class="w-36 h-36" aria-label="Tilde logo">
 					<TildeLogo />
 				</div>
 				<span class="sr-only laptop:not-sr-only text-xl font-bold">Tilde</span>
@@ -123,7 +123,7 @@
 			{#if editor}
 				<div
 					id="editor-controls"
-					class="w-full h-full p-3 flex flex-row tablet:flex-col justify-start items-center laptop:items-start gap-1 overflow-y-hidden tablet:overflow-y-auto overflow-x-auto tablet:overflow-x-hidden"
+					class="w-full h-full p-12 flex flex-row tablet:flex-col justify-start items-center laptop:items-start gap-8 overflow-y-hidden tablet:overflow-y-auto overflow-x-auto tablet:overflow-x-hidden"
 				>
 					<button
 						class="button laptop:w-full"
@@ -221,18 +221,18 @@
 		<main class="w-full h-full flex flex-col justify-center items-start overflow-hidden">
 			<div
 				id="editor-interface"
-				class="w-full h-full p-6 flex justify-center items-center overflow-y-auto border-y tablet:border-y-0 tablet:border-x border-black/10 dark:border-white/10"
+				class="w-full h-full p-12 flex justify-center items-center overflow-y-auto border-y tablet:border-y-0 tablet:border-x border-black/10 dark:border-white/10"
 				bind:this={editorInterface}
 			/>
 		</main>
 
 		<footer
-			class="w-full h-fit tablet:w-fit tablet:h-full p-3 flex flex-row tablet:flex-col justify-start items-center gap-3"
+			class="w-full h-fit tablet:w-fit tablet:h-full p-12 flex flex-row tablet:flex-col justify-start items-center gap-12"
 		>
 			{#if editor}
 				<div
 					id="more-options"
-					class="w-full tablet:h-full flex flex-row tablet:flex-col justify-between items-center laptop:items-start gap-1"
+					class="w-full tablet:h-full flex flex-row tablet:flex-col justify-between items-center laptop:items-start gap-8"
 				>
 					<div>
 						<button class="button" on:click={toggleExportDialog}>
@@ -241,27 +241,27 @@
 						</button>
 						<dialog
 							bind:this={exportDialog}
-							class="w-full max-w-lg p-3 bg-transparent backdrop:bg-black/50 backdrop:backdrop-blur"
+							class="w-full max-w-lg p-12 bg-transparent backdrop:bg-black/50 backdrop:backdrop-blur"
 						>
 							<div
-								class="w-full p-3 rounded-3xl text-black/80 dark:text-white/80 bg-white dark:bg-black relative"
+								class="w-full p-12 rounded-3xl text-black/80 dark:text-white/80 bg-white dark:bg-black relative"
 							>
-								<div class="pt-3 pr-3 absolute top-0 right-0">
+								<div class="pt-12 pr-12 absolute top-0 right-0">
 									<button class="button" on:click={toggleExportDialog}>
 										<X />
 										<span class="sr-only">Close</span>
 									</button>
 								</div>
-								<header class="w-full p-3">
+								<header class="w-full p-24">
 									<h2 class="text-xl">Export</h2>
 								</header>
-								<main class="w-full p-3 flex flex-col gap-3">
+								<main class="w-full p-12 flex flex-col gap-12">
 									<p>You can currently get your content as either JSON or HTML.</p>
 									<p>
 										There will eventually be support for Markdown, so be on the look-out for that.
 									</p>
 								</main>
-								<footer class="w-full p-3 flex flex-col tablet:flex-row tablet:justify-end gap-1">
+								<footer class="w-full p-12 flex flex-col tablet:flex-row tablet:justify-end gap-8">
 									<button class="button primary">
 										<span>Download JSON</span>
 									</button>
@@ -280,25 +280,25 @@
 						</button>
 						<dialog
 							bind:this={discardDialog}
-							class="w-full max-w-lg p-3 bg-transparent backdrop:bg-black/50 backdrop:backdrop-blur"
+							class="w-full max-w-lg p-24 bg-transparent backdrop:bg-black/50 backdrop:backdrop-blur"
 						>
 							<div
 								id="dialog-card"
-								class="w-full p-3 rounded-3xl text-black/80 dark:text-white/80 bg-white dark:bg-black relative"
+								class="w-full p-12 rounded-3xl text-black/80 dark:text-white/80 bg-white dark:bg-black relative"
 							>
-								<div class="pt-3 pr-3 absolute top-0 right-0">
+								<div class="pt-12 pr-12 absolute top-0 right-0">
 									<button class="button" on:click={toggleDiscardDialog}>
 										<X />
 										<span class="sr-only">Close</span>
 									</button>
 								</div>
-								<header class="w-full p-3">
+								<header class="w-full p-12">
 									<h2 class="text-xl">Discard</h2>
 								</header>
-								<main class="w-full p-3">
+								<main class="w-full p-12">
 									<p>Are you sure you want to discard this note?</p>
 								</main>
-								<footer class="w-full p-3 flex flex-col tablet:flex-row tablet:justify-end gap-1">
+								<footer class="w-full p-24 flex flex-col tablet:flex-row tablet:justify-end gap-8">
 									<button class="button" on:click={toggleDiscardDialog}>No, it's okay</button>
 									<button class="button primary" on:click={discardEditorContent}
 										>Yes, discard</button
