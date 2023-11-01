@@ -280,7 +280,7 @@
 						</button>
 						<dialog
 							bind:this={discardDialog}
-							class="w-full max-w-lg p-24 bg-transparent backdrop:bg-black/50 backdrop:backdrop-blur"
+							class="w-full max-w-lg p-12 bg-transparent backdrop:bg-black/50 backdrop:backdrop-blur"
 						>
 							<div
 								id="dialog-card"
@@ -298,7 +298,7 @@
 								<main class="w-full p-12">
 									<p>Are you sure you want to discard this note?</p>
 								</main>
-								<footer class="w-full p-24 flex flex-col tablet:flex-row tablet:justify-end gap-8">
+								<footer class="w-full p-12 flex flex-col tablet:flex-row tablet:justify-end gap-8">
 									<button class="button" on:click={toggleDiscardDialog}>No, it's okay</button>
 									<button class="button primary" on:click={discardEditorContent}
 										>Yes, discard</button
