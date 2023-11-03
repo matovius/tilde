@@ -22,11 +22,18 @@
 	} from 'lucide-svelte';
 
 	import TildeLogo from '../TildeLogo.svelte';
+	import Button from '../Button.svelte';
 
 	let editorInterface: HTMLElement;
 	let editor: Editor;
 	let EditorContentHTML: string;
 	let EditorContentJSON: JSONContent;
+
+	let htmlFile: Blob;
+	let jsonFile: Blob;
+
+	let htmlDownloadButton: HTMLAnchorElement;
+	let jsonDownloadButton: HTMLAnchorElement;
 
 	let discardDialog: HTMLDialogElement;
 	let discardDialogOpen: boolean = false;
@@ -57,8 +64,22 @@
 	function getEditorContent() {
 		EditorContentHTML = editor.getHTML();
 		EditorContentJSON = editor.getJSON();
-		console.log('HTML: ', EditorContentHTML);
-		console.log('JSON: ', EditorContentJSON);
+		//console.log('HTML: ', EditorContentHTML);
+		//console.log('JSON: ', EditorContentJSON);
+
+		jsonFile = new Blob([JSON.stringify(EditorContentJSON)], { type: 'application/json' });
+
+		htmlFile = new Blob([EditorContentHTML], { type: 'text/html' });
+
+		let jsonFileURL = URL.createObjectURL(jsonFile);
+		let htmlFilURL = URL.createObjectURL(htmlFile);
+
+		htmlDownloadButton.setAttribute('href', htmlFilURL);
+		htmlDownloadButton.setAttribute('download', 'tilde-data.html');
+		jsonDownloadButton.setAttribute('href', jsonFileURL);
+		jsonDownloadButton.setAttribute('download', 'tilde-data.json');
+
+		toggleExportDialog();
 	}
 
 	function discardEditorContent() {
@@ -97,6 +118,10 @@
 				EditorContentJSON = editor.getJSON();
 			}
 		});
+
+		jsonFile = new Blob([JSON.stringify(EditorContentJSON)], { type: 'application/json' });
+
+		htmlFile = new Blob([EditorContentHTML], { type: 'text/html' });
 	});
 
 	onDestroy(() => {
@@ -126,90 +151,92 @@
 					class="w-full h-full p-12 flex flex-row tablet:flex-col justify-start items-center laptop:items-start gap-8 overflow-y-hidden tablet:overflow-y-auto overflow-x-auto tablet:overflow-x-hidden"
 				>
 					<button
-						class="button laptop:w-full"
+						class="btn btn-ghost btn-neutral x-8 y-8 fit gap-12"
 						on:click={() => editor.chain().focus().setParagraph().run()}
-						class:active={editor.isActive('paragraph')}
+						class:btn-primary={editor.isActive('paragraph')}
 					>
 						<Pilcrow />
 						<span class="sr-only laptop:not-sr-only">Paragraph</span>
 					</button>
+
 					<button
-						class="button laptop:w-full"
+						class="btn btn-ghost btn-neutral x-8 y-8 fit gap-12"
 						on:click={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
-						class:active={editor.isActive('heading', { level: 1 })}
+						class:btn-primary={editor.isActive('heading', { level: 1 })}
 					>
 						<Heading1 />
 						<span class="sr-only laptop:not-sr-only">Heading 1</span>
 					</button>
+
 					<button
-						class="button laptop:w-full"
+						class="btn btn-ghost btn-neutral x-8 y-8 fit gap-12"
 						on:click={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
-						class:active={editor.isActive('heading', { level: 2 })}
+						class:btn-primary={editor.isActive('heading', { level: 2 })}
 					>
 						<Heading2 />
 						<span class="sr-only laptop:not-sr-only">Heading 2</span>
 					</button>
 					<button
-						class="button laptop:w-full"
+						class="btn btn-ghost btn-neutral x-8 y-8 fit gap-12"
 						on:click={() => editor.chain().focus().toggleHeading({ level: 3 }).run()}
-						class:active={editor.isActive('heading', { level: 3 })}
+						class:btn-primary={editor.isActive('heading', { level: 3 })}
 					>
 						<Heading3 />
 						<span class="sr-only laptop:not-sr-only">Heading 3</span>
 					</button>
 
 					<button
-						class="button laptop:w-full"
+						class="btn btn-ghost btn-neutral x-8 y-8 fit gap-12"
 						on:click={() => editor.chain().focus().toggleBold().run()}
-						class:active={editor.isActive('bold')}
+						class:btn-primary={editor.isActive('bold')}
 					>
 						<Bold />
 						<span class="sr-only laptop:not-sr-only">Bold</span>
 					</button>
 					<button
-						class="button w-full"
+						class="btn btn-ghost btn-neutral x-8 y-8 fit gap-12"
 						on:click={() => editor.chain().focus().toggleItalic().run()}
-						class:active={editor.isActive('italic')}
+						class:btn-primary={editor.isActive('italic')}
 					>
 						<Italic />
 						<span class="sr-only laptop:not-sr-only">Italic</span>
 					</button>
 					<button
-						class="button w-full"
+						class="btn btn-ghost btn-neutral x-8 y-8 fit gap-12"
 						on:click={() => editor.chain().focus().toggleStrike().run()}
-						class:active={editor.isActive('strike')}
+						class:btn-primary={editor.isActive('strike')}
 					>
 						<Strikethrough />
 						<span class="sr-only laptop:not-sr-only">Strikethrough</span>
 					</button>
 					<button
-						class="button w-full"
+						class="btn btn-ghost btn-neutral x-8 y-8 fit gap-12"
 						on:click={() => editor.chain().focus().toggleBlockquote().run()}
-						class:active={editor.isActive('blockquote')}
+						class:btn-primary={editor.isActive('blockquote')}
 					>
 						<Quote />
 						<span class="sr-only laptop:not-sr-only">Blockquote</span>
 					</button>
 					<button
-						class="button w-full"
+						class="btn btn-ghost btn-neutral x-8 y-8 fit gap-12"
 						on:click={() => editor.chain().focus().toggleCodeBlock().run()}
-						class:active={editor.isActive('codeBlock')}
+						class:btn-primary={editor.isActive('codeBlock')}
 					>
 						<Code />
 						<span class="sr-only laptop:not-sr-only">Codeblock</span>
 					</button>
 					<button
-						class="button w-full"
+						class="btn btn-ghost btn-neutral x-8 y-8 fit gap-12"
 						on:click={() => editor.chain().focus().toggleBulletList().run()}
-						class:active={editor.isActive('bulletList')}
+						class:btn-primary={editor.isActive('bulletList')}
 					>
 						<List />
 						<span class="sr-only laptop:not-sr-only">Bullet List</span>
 					</button>
 					<button
-						class="button w-full"
+						class="btn btn-ghost btn-neutral x-8 y-8 fit gap-12"
 						on:click={() => editor.chain().focus().toggleOrderedList().run()}
-						class:active={editor.isActive('orderedList')}
+						class:btn-primary={editor.isActive('orderedList')}
 					>
 						<ListOrdered />
 						<span class="sr-only laptop:not-sr-only">Numbered List</span>
@@ -218,10 +245,12 @@
 			{/if}
 		</header>
 
-		<main class="w-full h-full flex flex-col justify-center items-start overflow-hidden">
+		<main
+			class="w-full max-w-[40rem] h-full flex flex-col justify-center items-start overflow-hidden"
+		>
 			<div
 				id="editor-interface"
-				class="w-full h-full p-12 flex justify-center items-center overflow-y-auto border-y tablet:border-y-0 tablet:border-x border-black/10 dark:border-white/10"
+				class="w-full h-full p-24 flex justify-center items-center overflow-y-auto border-y tablet:border-y-0 tablet:border-x border-black/10 dark:border-white/10"
 				bind:this={editorInterface}
 			/>
 		</main>
@@ -235,74 +264,90 @@
 					class="w-full tablet:h-full flex flex-row tablet:flex-col justify-between items-center laptop:items-start gap-8"
 				>
 					<div>
-						<button class="button" on:click={toggleExportDialog}>
+						<Button as="button" padX="x-8" on:click={getEditorContent}>
 							<Download />
 							<span class="sr-only laptop:not-sr-only">Export</span>
-						</button>
+						</Button>
 						<dialog
 							bind:this={exportDialog}
-							class="w-full max-w-lg p-12 bg-transparent backdrop:bg-black/50 backdrop:backdrop-blur"
+							class="w-full max-w-lg p-24 bg-transparent backdrop:bg-black/50 backdrop:backdrop-blur"
 						>
 							<div
-								class="w-full p-12 rounded-3xl text-black/80 dark:text-white/80 bg-white dark:bg-black relative"
+								class="w-full rounded-3xl text-black/80 dark:text-white/80 bg-white dark:bg-black relative"
 							>
-								<div class="pt-12 pr-12 absolute top-0 right-0">
-									<button class="button" on:click={toggleExportDialog}>
+								<header class="w-full p-12 pl-24 flex flex-row justify-between items-center gap-24">
+									<h2 class="text-xl">Export</h2>
+									<Button as="button" padX="x-8" on:click={toggleExportDialog}>
 										<X />
 										<span class="sr-only">Close</span>
-									</button>
-								</div>
-								<header class="w-full p-24">
-									<h2 class="text-xl">Export</h2>
+									</Button>
 								</header>
-								<main class="w-full p-12 flex flex-col gap-12">
+								<main class="w-full p-24 flex flex-col gap-12">
 									<p>You can currently get your content as either JSON or HTML.</p>
 									<p>
 										There will eventually be support for Markdown, so be on the look-out for that.
 									</p>
 								</main>
-								<footer class="w-full p-12 flex flex-col tablet:flex-row tablet:justify-end gap-8">
-									<button class="button primary">
+								<footer
+									class="w-full p-12 flex flex-col tablet:flex-row justify-center items-center gap-8"
+								>
+									<a
+										href="/"
+										class="btn btn-ghost btn-neutral full x-12 y-8"
+										bind:this={jsonDownloadButton}
+									>
 										<span>Download JSON</span>
-									</button>
-									<button class="button primary">
+									</a>
+									<a
+										href="/"
+										class="btn btn-solid btn-neutral full x-12 y-8"
+										bind:this={htmlDownloadButton}
+									>
 										<span>Download HTML</span>
-									</button>
+									</a>
 								</footer>
 							</div>
 						</dialog>
 					</div>
 
 					<div>
-						<button class="button danger" on:click={toggleDiscardDialog}>
+						<Button as="button" variant="btn-danger" padX="x-8" on:click={toggleDiscardDialog}>
 							<Trash2 />
 							<span class="sr-only laptop:not-sr-only">Discard</span>
-						</button>
+						</Button>
 						<dialog
 							bind:this={discardDialog}
-							class="w-full max-w-lg p-12 bg-transparent backdrop:bg-black/50 backdrop:backdrop-blur"
+							class="w-full max-w-lg p-24 bg-transparent backdrop:bg-black/50 backdrop:backdrop-blur"
 						>
 							<div
 								id="dialog-card"
-								class="w-full p-12 rounded-3xl text-black/80 dark:text-white/80 bg-white dark:bg-black relative"
+								class="w-full rounded-3xl text-black/80 dark:text-white/80 bg-white dark:bg-black relative"
 							>
-								<div class="pt-12 pr-12 absolute top-0 right-0">
-									<button class="button" on:click={toggleDiscardDialog}>
+								<header class="w-full p-12 pl-24 flex flex-row justify-between items-center gap-24">
+									<h2 class="text-xl">Discard</h2>
+									<Button as="button" padX="x-8" on:click={toggleDiscardDialog}>
 										<X />
 										<span class="sr-only">Close</span>
-									</button>
-								</div>
-								<header class="w-full p-12">
-									<h2 class="text-xl">Discard</h2>
+									</Button>
 								</header>
-								<main class="w-full p-12">
+								<main class="w-full p-24">
 									<p>Are you sure you want to discard this note?</p>
 								</main>
-								<footer class="w-full p-12 flex flex-col tablet:flex-row tablet:justify-end gap-8">
-									<button class="button" on:click={toggleDiscardDialog}>No, it's okay</button>
-									<button class="button primary" on:click={discardEditorContent}
-										>Yes, discard</button
+								<footer
+									class="w-full p-12 flex flex-col tablet:flex-row justify-center items-center gap-8"
+								>
+									<Button as="button" width="full" on:click={toggleDiscardDialog}>
+										<span>No, it's okay</span>
+									</Button>
+									<Button
+										as="button"
+										style="btn-solid"
+										variant="btn-danger"
+										width="full"
+										on:click={discardEditorContent}
 									>
+										<span>Yes, discard</span>
+									</Button>
 								</footer>
 							</div>
 						</dialog>
