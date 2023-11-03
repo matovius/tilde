@@ -1,6 +1,7 @@
 <script lang="ts">
-	import TildeLogo from '$lib/components/TildeLogo.svelte';
 	import { ArrowLeft } from 'lucide-svelte';
+	import TildeLogo from '$lib/components/TildeLogo.svelte';
+	import Button from '$lib/components/Button.svelte';
 
 	function goToPreviousPage(): void {
 		window.history.back();
@@ -27,9 +28,9 @@
 
 <footer class="w-full flex justify-center items-center">
 	<div class="w-full max-w-[52.5rem] p-24">
-		<button class="button" on:click={goToPreviousPage}>
+		<Button as="button" on:click={goToPreviousPage}>
 			<ArrowLeft />
 			<span>Go Back</span>
-		</button>
+		</Button>
 	</div>
 </footer>
