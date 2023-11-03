@@ -9,19 +9,16 @@
 </svelte:head>
 
 <div class="w-full h-full flex flex-col justify-start items-center">
-	<header class="w-full flex justify-center items-center">
-		<div class="w-full max-w-[52.5rem] p-24 flex justify-center items-center">
-			<nav class="w-fit mx-auto">
-				<ul class="flex flex-row justify-center items-center gap-24">
-					<li class="link">
-						<a href="/why-tilde" class="link hover:text-white"> Why Tilde? </a>
-					</li>
-					<li class="link">
-						<a href="/availability" class="link hover:text-white"> Availability </a>
-					</li>
-				</ul>
-			</nav>
-		</div>
+	<header class="w-full flex flex-row justify-end items-center">
+		<nav class="w-fit p-24">
+			<ul class="flex flex-row justify-center items-center gap-24">
+				<li class="link">
+					<Button as="link" url="/availability">
+						<span>Availability</span>
+					</Button>
+				</li>
+			</ul>
+		</nav>
 	</header>
 	<main class="w-full h-full flex flex-col justify-start items-center">
 		<div
