@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Button from '$lib/components/Button.svelte';
 	import TildeLogo from '$lib/components/TildeLogo.svelte';
 	import { ArrowRight } from 'lucide-svelte';
 </script>
@@ -33,13 +34,10 @@
 			<h2 class="text-center text-4xl font-medium text-black/60 dark:text-white/60">
 				The minimal web-based text editor
 			</h2>
-			<a
-				href="/edit"
-				class="button text-white bg-chrysler hover:bg-chrysler/80 focus:bg-chrysler/80"
-			>
+			<Button as="link" url="/edit" variant="btn-primary" style="btn-solid">
 				<span>Get Started</span>
 				<ArrowRight />
-			</a>
+			</Button>
 		</div>
 	</main>
 	<footer class="w-full flex justify-center items-center">
