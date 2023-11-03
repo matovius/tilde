@@ -53,24 +53,87 @@ em {
 	@apply w-full h-full aspect-square;
 }
 
-.button {
-	@apply font-medium text-base no-underline flex flex-row gap-8 px-12 py-8 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 cursor-pointer outline outline-2 outline-transparent focus-visible:outline-current outline-offset-2 disabled:opacity-60 disabled:pointer-events-none disabled:touch-none;
+.btn {
+	@apply font-fira font-medium text-base min-w-fit flex flex-row justify-center items-center rounded-xl outline outline-2 outline-offset-2 outline-transparent;
 }
 
-.button[data-current-page='current-page'] {
-	@apply bg-black/5 dark:bg-white/5 hover:bg-black/5 dark:hover:bg-white/5 focus:bg-black/5 dark:focus:bg-white/5;
+.btn.btn-neutral {
+	@apply focus-visible:outline-black/50 dark:focus-visible:outline-white/50;
+}
+.btn.btn-primary {
+	@apply focus-visible:outline-chrysler/50;
+}
+.btn.btn-danger {
+	@apply focus-visible:outline-red/50;
 }
 
-.button.primary {
-	@apply text-white bg-chrysler hover:bg-chrysler/80 disabled:hover:bg-chrysler;
+.btn.btn-solid {
+	@apply text-white;
+}
+.btn.btn-solid.btn-neutral {
+	@apply dark:text-black bg-black dark:bg-white hover:bg-black/80 dark:hover:bg-white/80;
+}
+.btn.btn-solid.btn-primary {
+	@apply bg-chrysler hover:bg-chrysler/80;
+}
+.btn.btn-solid.btn-danger {
+	@apply bg-red hover:bg-red/80;
 }
 
-.button.danger {
-	@apply text-red;
+.btn.btn-ghost {
+	@apply bg-transparent;
+}
+.btn.btn-ghost.btn-neutral {
+	@apply text-black/80 dark:text-white hover:bg-black/10 dark:hover:bg-white/10;
+}
+.btn.btn-ghost.btn-primary {
+	@apply text-chrysler/80 hover:bg-chrysler/10;
+}
+.btn.btn-ghost.btn-danger {
+	@apply text-red/80 hover:bg-red/10;
 }
 
-.button.active {
-	@apply text-chrysler/80;
+.btn.active {
+	@apply text-chrysler/80 hover:bg-chrysler/5 focus-visible:outline-chrysler/50 relative after:w-4 after:h-4 after:content-none after:bg-chrysler after:absolute after:bottom-0 tablet:after:bottom-auto after:right-auto tablet:after:right-0;
+}
+
+.btn.x-4 {
+	@apply px-4;
+}
+.btn.x-8 {
+	@apply px-8;
+}
+.btn.x-12 {
+	@apply px-12;
+}
+.btn.x-24 {
+	@apply px-24;
+}
+.btn.x-36 {
+	@apply px-36;
+}
+
+.btn.y-4 {
+	@apply py-4;
+}
+.btn.y-8 {
+	@apply py-8;
+}
+.btn.y-12 {
+	@apply py-12;
+}
+.btn.y-24 {
+	@apply py-24;
+}
+.btn.y-36 {
+	@apply py-36;
+}
+
+.btn.full {
+	@apply w-full;
+}
+.btn.fit {
+	@apply w-fit;
 }
 
 .link {
@@ -80,21 +143,3 @@ em {
 .input {
 	@apply w-full px-12 py-8 rounded-lg border border-black/10 hover:border-black/40 dark:border-white/10 dark:hover:border-white/40 bg-transparent outline outline-2 outline-transparent outline-offset-2 focus-visible:outline-current;
 }
-
-/*
-.ProseMirror-menubar-wrapper {
-	@apply w-full h-full;
-}
-
-.ProseMirror,
-.cm-editor {
-	@apply wysiwyg dark:wysiwyg-invert wysiwyg-sm tablet:wysiwyg tablet:dark:wysiwyg-invert w-full max-w-none h-full m-0 outline-none selection:bg-chrysler/20 dark:selection:bg-chrysler;
-}
-
-.cm-editor {
-	@apply max-h-full;
-}
-
-.cm-scroller {
-	@apply overflow-auto;
-}*/
