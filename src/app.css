@@ -54,9 +54,10 @@ em {
 }
 
 .btn {
-	@apply font-fira font-medium text-base min-w-fit flex flex-row justify-center items-center rounded-xl outline outline-2 outline-offset-2 outline-transparent;
+	@apply font-fira font-medium text-base min-w-fit flex flex-row justify-start items-center rounded-none outline outline-2 -outline-offset-2 outline-transparent focus-visible:outline-current;
 }
 
+/*
 .btn.btn-neutral {
 	@apply focus-visible:outline-black/50 dark:focus-visible:outline-white/50;
 }
@@ -65,7 +66,7 @@ em {
 }
 .btn.btn-danger {
 	@apply focus-visible:outline-red/50;
-}
+}*/
 
 .btn.btn-solid {
 	@apply text-white;
