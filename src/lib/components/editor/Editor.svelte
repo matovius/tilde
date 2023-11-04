@@ -18,6 +18,7 @@
 		Strikethrough,
 		Trash,
 		Trash2,
+		Upload,
 		X
 	} from 'lucide-svelte';
 
@@ -35,11 +36,14 @@
 	let htmlDownloadButton: HTMLAnchorElement;
 	let jsonDownloadButton: HTMLAnchorElement;
 
+	let uploadDialog: HTMLDialogElement;
+	let uploadDialogOpen: boolean = false;
+
 	let discardDialog: HTMLDialogElement;
 	let discardDialogOpen: boolean = false;
 
-	let exportDialog: HTMLDialogElement;
-	let exportDialogOpen: boolean = false;
+	let downloadDialog: HTMLDialogElement;
+	let downloadDialogOpen: boolean = false;
 
 	function toggleDiscardDialog() {
 		if (!discardDialogOpen) {
@@ -51,13 +55,23 @@
 		}
 	}
 
-	function toggleExportDialog() {
-		if (!exportDialogOpen) {
-			exportDialogOpen = true;
-			exportDialog.showModal();
+	function toggleDownloadDialog() {
+		if (!downloadDialogOpen) {
+			downloadDialogOpen = true;
+			downloadDialog.showModal();
 		} else {
-			exportDialog.close();
-			exportDialogOpen = false;
+			downloadDialog.close();
+			downloadDialogOpen = false;
+		}
+	}
+
+	function toggleUploadDialog() {
+		if (!uploadDialogOpen) {
+			uploadDialogOpen = true;
+			uploadDialog.showModal();
+		} else {
+			uploadDialog.close();
+			uploadDialogOpen = false;
 		}
 	}
 
@@ -79,7 +93,7 @@
 		jsonDownloadButton.setAttribute('href', jsonFileURL);
 		jsonDownloadButton.setAttribute('download', 'tilde-data.json');
 
-		toggleExportDialog();
+		toggleDownloadDialog();
 	}
 
 	function discardEditorContent() {
@@ -138,11 +152,10 @@
 		<header
 			class="w-full h-fit tablet:w-fit tablet:h-full flex flex-col justify-start items-center"
 		>
-			<div class="w-fit flex flex-row justify-center items-center gap-24 p-12">
+			<div class="flex flex-row justify-center items-center gap-24 p-24">
 				<div class="w-36 h-36" aria-label="Tilde logo">
 					<TildeLogo />
 				</div>
-				<span class="sr-only laptop:not-sr-only text-xl font-bold">Tilde</span>
 			</div>
 
 			{#if editor}
@@ -261,106 +274,169 @@
 			{#if editor}
 				<div
 					id="more-options"
-					class="w-full tablet:h-full flex flex-row tablet:flex-col justify-between items-center laptop:items-start"
+					class="w-full tablet:w-fit tablet:h-full flex flex-row tablet:flex-col justify-between items-center laptop:items-start"
 				>
-					<div>
-						<Button as="button" padX="x-12" padY="y-12" on:click={getEditorContent}>
-							<Download />
-							<span class="sr-only laptop:not-sr-only">Export</span>
-						</Button>
-						<dialog
-							bind:this={exportDialog}
-							class="w-full max-w-lg p-24 bg-transparent backdrop:bg-black/50 backdrop:backdrop-blur"
-						>
-							<div
-								class="w-full rounded-none text-black/80 dark:text-white/80 bg-white dark:bg-black relative"
+					<div class="w-fit tablet:w-full flex flex-row tablet:flex-col justify-start items-center">
+						<div class="w-full">
+							<Button
+								as="button"
+								padX="x-12"
+								padY="y-12"
+								width="full"
+								on:click={toggleUploadDialog}
 							>
-								<header class="w-full flex flex-row justify-between items-center gap-24">
-									<h2 class="text-xl pl-24 mr-auto">Export</h2>
-									<Button as="button" padX="x-12" padY="y-12" on:click={toggleExportDialog}>
-										<X />
-										<span class="sr-only">Close</span>
-									</Button>
-								</header>
-								<main class="w-full p-24 flex flex-col gap-12">
-									<p>You can currently get your content as either JSON or HTML.</p>
-									<p>
-										There will eventually be support for Markdown, so be on the look-out for that.
-									</p>
-								</main>
-								<footer class="w-full flex flex-col tablet:flex-row justify-center items-center">
-									<a
-										href="/"
-										class="btn btn-ghost btn-neutral full x-24 y-12"
-										bind:this={jsonDownloadButton}
-									>
-										<span class="mx-auto">Download JSON</span>
-									</a>
-									<a
-										href="/"
-										class="btn btn-solid btn-neutral full x-24 y-12"
-										bind:this={htmlDownloadButton}
-									>
-										<span class="mx-auto">Download HTML</span>
-									</a>
-								</footer>
-							</div>
-						</dialog>
-					</div>
-
-					<div>
-						<Button
-							as="button"
-							variant="btn-danger"
-							padX="x-12"
-							padY="y-12"
-							on:click={toggleDiscardDialog}
-						>
-							<Trash2 />
-							<span class="sr-only laptop:not-sr-only">Discard</span>
-						</Button>
-						<dialog
-							bind:this={discardDialog}
-							class="w-full max-w-lg p-24 bg-transparent backdrop:bg-black/50 backdrop:backdrop-blur"
-						>
-							<div
-								id="dialog-card"
-								class="w-full rounded-none text-black/80 dark:text-white/80 bg-white dark:bg-black relative"
+								<Upload />
+								<span class="sr-only laptop:not-sr-only">Upload</span>
+							</Button>
+							<dialog
+								bind:this={uploadDialog}
+								class="w-full max-w-lg p-24 bg-transparent backdrop:bg-black/50 backdrop:backdrop-blur"
 							>
-								<header class="w-full flex flex-row justify-between items-center">
-									<h2 class="text-xl pl-24 mr-auto">Discard</h2>
-									<Button as="button" padX="x-12" padY="y-12" on:click={toggleDiscardDialog}>
-										<X />
-										<span class="sr-only">Close</span>
-									</Button>
-								</header>
-								<main class="w-full p-24">
-									<p>Are you sure you want to discard this note?</p>
-								</main>
-								<footer class="w-full flex flex-col tablet:flex-row justify-center items-center">
-									<Button
-										as="button"
-										width="full"
-										padX="x-24"
-										padY="y-12"
-										on:click={toggleDiscardDialog}
-									>
-										<span class="mx-auto">No, it's okay</span>
-									</Button>
-									<Button
-										as="button"
-										style="btn-solid"
-										variant="btn-danger"
-										width="full"
-										padX="x-24"
-										padY="y-12"
-										on:click={discardEditorContent}
-									>
-										<span class="mx-auto">Yes, discard</span>
-									</Button>
-								</footer>
-							</div>
-						</dialog>
+								<div
+									id="dialog-card"
+									class="w-full rounded-none text-black/80 dark:text-white/80 bg-white dark:bg-black relative"
+								>
+									<header class="w-full flex flex-row justify-between items-center">
+										<h2 class="text-xl pl-24 mr-auto">Upload</h2>
+										<Button as="button" padX="x-12" padY="y-12" on:click={toggleUploadDialog}>
+											<X />
+											<span class="sr-only">Close</span>
+										</Button>
+									</header>
+									<main class="w-full p-24 flex flex-col gap-24">
+										<p>
+											As of now, you can only upload HTML and JSON files. It's recommended to use
+											HTML because JSON might get parsed incorrectly if it's not formatted in a way
+											that the editor recognizes.
+										</p>
+										<p>
+											You will eventually be able to upload Markdown files for easier portability.
+										</p>
+									</main>
+									<footer class="w-full flex flex-col tablet:flex-row justify-center items-center">
+										<Button
+											as="button"
+											width="full"
+											padX="x-24"
+											padY="y-12"
+											on:click={toggleUploadDialog}
+										>
+											<span class="mx-auto">JSON</span>
+										</Button>
+										<Button
+											as="button"
+											style="btn-solid"
+											variant="btn-neutral"
+											width="full"
+											padX="x-24"
+											padY="y-12"
+											on:click={toggleUploadDialog}
+										>
+											<span class="mx-auto">HTML</span>
+										</Button>
+									</footer>
+								</div>
+							</dialog>
+						</div>
+						<div class="w-full">
+							<Button as="button" padX="x-12" padY="y-12" width="full" on:click={getEditorContent}>
+								<Download />
+								<span class="sr-only laptop:not-sr-only">Download</span>
+							</Button>
+							<dialog
+								bind:this={downloadDialog}
+								class="w-full max-w-lg p-24 bg-transparent backdrop:bg-black/50 backdrop:backdrop-blur"
+							>
+								<div
+									class="w-full rounded-none text-black/80 dark:text-white/80 bg-white dark:bg-black relative"
+								>
+									<header class="w-full flex flex-row justify-between items-center gap-24">
+										<h2 class="text-xl pl-24 mr-auto">Download</h2>
+										<Button as="button" padX="x-12" padY="y-12" on:click={toggleDownloadDialog}>
+											<X />
+											<span class="sr-only">Close</span>
+										</Button>
+									</header>
+									<main class="w-full p-24 flex flex-col gap-24">
+										<p>You can currently get your content as either JSON or HTML.</p>
+										<p>
+											There will eventually be support for Markdown, so be on the look-out for that.
+										</p>
+									</main>
+									<footer class="w-full flex flex-col tablet:flex-row justify-center items-center">
+										<a
+											href="/"
+											class="btn btn-ghost btn-neutral full x-24 y-12"
+											bind:this={jsonDownloadButton}
+										>
+											<span class="mx-auto">Download JSON</span>
+										</a>
+										<a
+											href="/"
+											class="btn btn-solid btn-neutral full x-24 y-12"
+											bind:this={htmlDownloadButton}
+										>
+											<span class="mx-auto">Download HTML</span>
+										</a>
+									</footer>
+								</div>
+							</dialog>
+						</div>
+						<div class="w-full">
+							<Button
+								as="button"
+								variant="btn-danger"
+								padX="x-12"
+								padY="y-12"
+								width="full"
+								on:click={toggleDiscardDialog}
+							>
+								<Trash2 />
+								<span class="sr-only laptop:not-sr-only">Discard</span>
+							</Button>
+							<dialog
+								bind:this={discardDialog}
+								class="w-full max-w-lg p-24 bg-transparent backdrop:bg-black/50 backdrop:backdrop-blur"
+							>
+								<div
+									id="dialog-card"
+									class="w-full rounded-none text-black/80 dark:text-white/80 bg-white dark:bg-black relative"
+								>
+									<header class="w-full flex flex-row justify-between items-center">
+										<h2 class="text-xl pl-24 mr-auto">Discard</h2>
+										<Button as="button" padX="x-12" padY="y-12" on:click={toggleDiscardDialog}>
+											<X />
+											<span class="sr-only">Close</span>
+										</Button>
+									</header>
+									<main class="w-full p-24">
+										<p>Are you sure you want to discard this note?</p>
+									</main>
+									<footer class="w-full flex flex-col tablet:flex-row justify-center items-center">
+										<Button
+											as="button"
+											width="full"
+											padX="x-24"
+											padY="y-12"
+											on:click={toggleDiscardDialog}
+										>
+											<span class="mx-auto">No, it's okay</span>
+										</Button>
+										<Button
+											as="button"
+											style="btn-solid"
+											variant="btn-danger"
+											width="full"
+											padX="x-24"
+											padY="y-12"
+											on:click={discardEditorContent}
+										>
+											<span class="mx-auto">Yes, discard</span>
+										</Button>
+									</footer>
+								</div>
+							</dialog>
+						</div>
 					</div>
 				</div>
 			{/if}
