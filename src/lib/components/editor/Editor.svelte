@@ -38,6 +38,9 @@
 	let discardDialog: HTMLDialogElement;
 	let discardDialogOpen: boolean = false;
 
+	let exportDialog: HTMLDialogElement;
+	let exportDialogOpen: boolean = false;
+
 	function toggleDiscardDialog() {
 		if (!discardDialogOpen) {
 			discardDialogOpen = true;
@@ -47,9 +50,6 @@
 			discardDialogOpen = false;
 		}
 	}
-
-	let exportDialog: HTMLDialogElement;
-	let exportDialogOpen: boolean = false;
 
 	function toggleExportDialog() {
 		if (!exportDialogOpen) {
