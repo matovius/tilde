@@ -92,7 +92,7 @@
 			editorProps: {
 				attributes: {
 					class:
-						'wysiwyg dark:wysiwyg-invert wysiwyg-sm tablet:wysiwyg tablet:dark:wysiwyg-invert w-full max-w-none h-full m-0 outline-none selection:bg-chrysler/40 dark:selection:bg-chrysler'
+						'wysiwyg dark:wysiwyg-invert wysiwyg-sm tablet:wysiwyg tablet:dark:wysiwyg-invert wysiwyg-pre:rounded-none w-full max-w-none h-full m-0 outline-none selection:bg-chrysler/40 dark:selection:bg-chrysler'
 				}
 			},
 			element: editorInterface,
@@ -136,7 +136,7 @@
 		class="w-full h-full flex flex-col tablet:flex-row tablet:justify-center tablet:items-center overflow-hidden"
 	>
 		<header
-			class="w-full h-fit tablet:w-fit tablet:h-full flex flex-row tablet:flex-col justify-start items-center"
+			class="w-full h-fit tablet:w-fit tablet:h-full flex flex-col justify-start items-center"
 		>
 			<div class="w-fit flex flex-row justify-center items-center gap-24 p-12">
 				<div class="w-36 h-36" aria-label="Tilde logo">
@@ -148,10 +148,10 @@
 			{#if editor}
 				<div
 					id="editor-controls"
-					class="w-full h-full p-12 flex flex-row tablet:flex-col justify-start items-center laptop:items-start gap-8 overflow-y-hidden tablet:overflow-y-auto overflow-x-auto tablet:overflow-x-hidden"
+					class="w-full tablet:w-fit h-fit tablet:h-full flex flex-row tablet:flex-col justify-start items-center laptop:items-start gap-0 overflow-x-auto tablet:overflow-x-hidden overflow-y-hidden tablet:overflow-y-auto"
 				>
 					<button
-						class="btn btn-ghost btn-neutral x-8 y-8 fit gap-12"
+						class="btn btn-ghost btn-neutral x-12 y-12 full gap-12"
 						on:click={() => editor.chain().focus().setParagraph().run()}
 						class:btn-primary={editor.isActive('paragraph')}
 					>
@@ -160,7 +160,7 @@
 					</button>
 
 					<button
-						class="btn btn-ghost btn-neutral x-8 y-8 fit gap-12"
+						class="btn btn-ghost btn-neutral x-12 y-12 full gap-12"
 						on:click={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
 						class:btn-primary={editor.isActive('heading', { level: 1 })}
 					>
@@ -169,7 +169,7 @@
 					</button>
 
 					<button
-						class="btn btn-ghost btn-neutral x-8 y-8 fit gap-12"
+						class="btn btn-ghost btn-neutral x-12 y-12 full gap-12"
 						on:click={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
 						class:btn-primary={editor.isActive('heading', { level: 2 })}
 					>
@@ -177,7 +177,7 @@
 						<span class="sr-only laptop:not-sr-only">Heading 2</span>
 					</button>
 					<button
-						class="btn btn-ghost btn-neutral x-8 y-8 fit gap-12"
+						class="btn btn-ghost btn-neutral x-12 y-12 full gap-12"
 						on:click={() => editor.chain().focus().toggleHeading({ level: 3 }).run()}
 						class:btn-primary={editor.isActive('heading', { level: 3 })}
 					>
@@ -186,7 +186,7 @@
 					</button>
 
 					<button
-						class="btn btn-ghost btn-neutral x-8 y-8 fit gap-12"
+						class="btn btn-ghost btn-neutral x-12 y-12 full gap-12"
 						on:click={() => editor.chain().focus().toggleBold().run()}
 						class:btn-primary={editor.isActive('bold')}
 					>
@@ -194,7 +194,7 @@
 						<span class="sr-only laptop:not-sr-only">Bold</span>
 					</button>
 					<button
-						class="btn btn-ghost btn-neutral x-8 y-8 fit gap-12"
+						class="btn btn-ghost btn-neutral x-12 y-12 full gap-12"
 						on:click={() => editor.chain().focus().toggleItalic().run()}
 						class:btn-primary={editor.isActive('italic')}
 					>
@@ -202,7 +202,7 @@
 						<span class="sr-only laptop:not-sr-only">Italic</span>
 					</button>
 					<button
-						class="btn btn-ghost btn-neutral x-8 y-8 fit gap-12"
+						class="btn btn-ghost btn-neutral x-12 y-12 full gap-12"
 						on:click={() => editor.chain().focus().toggleStrike().run()}
 						class:btn-primary={editor.isActive('strike')}
 					>
@@ -210,7 +210,7 @@
 						<span class="sr-only laptop:not-sr-only">Strikethrough</span>
 					</button>
 					<button
-						class="btn btn-ghost btn-neutral x-8 y-8 fit gap-12"
+						class="btn btn-ghost btn-neutral x-12 y-12 full gap-12"
 						on:click={() => editor.chain().focus().toggleBlockquote().run()}
 						class:btn-primary={editor.isActive('blockquote')}
 					>
@@ -218,7 +218,7 @@
 						<span class="sr-only laptop:not-sr-only">Blockquote</span>
 					</button>
 					<button
-						class="btn btn-ghost btn-neutral x-8 y-8 fit gap-12"
+						class="btn btn-ghost btn-neutral x-12 y-12 full gap-12"
 						on:click={() => editor.chain().focus().toggleCodeBlock().run()}
 						class:btn-primary={editor.isActive('codeBlock')}
 					>
@@ -226,7 +226,7 @@
 						<span class="sr-only laptop:not-sr-only">Codeblock</span>
 					</button>
 					<button
-						class="btn btn-ghost btn-neutral x-8 y-8 fit gap-12"
+						class="btn btn-ghost btn-neutral x-12 y-12 full gap-12"
 						on:click={() => editor.chain().focus().toggleBulletList().run()}
 						class:btn-primary={editor.isActive('bulletList')}
 					>
@@ -234,7 +234,7 @@
 						<span class="sr-only laptop:not-sr-only">Bullet List</span>
 					</button>
 					<button
-						class="btn btn-ghost btn-neutral x-8 y-8 fit gap-12"
+						class="btn btn-ghost btn-neutral x-12 y-12 full gap-12"
 						on:click={() => editor.chain().focus().toggleOrderedList().run()}
 						class:btn-primary={editor.isActive('orderedList')}
 					>
@@ -250,21 +250,21 @@
 		>
 			<div
 				id="editor-interface"
-				class="w-full h-full p-24 flex justify-center items-center overflow-y-auto border-y tablet:border-y-0 tablet:border-x border-black/10 dark:border-white/10"
+				class="w-full h-full p-24 flex justify-center items-center overflow-y-auto"
 				bind:this={editorInterface}
 			/>
 		</main>
 
 		<footer
-			class="w-full h-fit tablet:w-fit tablet:h-full p-12 flex flex-row tablet:flex-col justify-start items-center gap-12"
+			class="w-full h-fit tablet:w-fit tablet:h-full flex flex-row tablet:flex-col justify-start items-center gap-12"
 		>
 			{#if editor}
 				<div
 					id="more-options"
-					class="w-full tablet:h-full flex flex-row tablet:flex-col justify-between items-center laptop:items-start gap-8"
+					class="w-full tablet:h-full flex flex-row tablet:flex-col justify-between items-center laptop:items-start"
 				>
 					<div>
-						<Button as="button" padX="x-8" on:click={getEditorContent}>
+						<Button as="button" padX="x-12" padY="y-12" on:click={getEditorContent}>
 							<Download />
 							<span class="sr-only laptop:not-sr-only">Export</span>
 						</Button>
@@ -273,11 +273,11 @@
 							class="w-full max-w-lg p-24 bg-transparent backdrop:bg-black/50 backdrop:backdrop-blur"
 						>
 							<div
-								class="w-full rounded-3xl text-black/80 dark:text-white/80 bg-white dark:bg-black relative"
+								class="w-full rounded-none text-black/80 dark:text-white/80 bg-white dark:bg-black relative"
 							>
-								<header class="w-full p-12 pl-24 flex flex-row justify-between items-center gap-24">
-									<h2 class="text-xl">Export</h2>
-									<Button as="button" padX="x-8" on:click={toggleExportDialog}>
+								<header class="w-full flex flex-row justify-between items-center gap-24">
+									<h2 class="text-xl pl-24 mr-auto">Export</h2>
+									<Button as="button" padX="x-12" padY="y-12" on:click={toggleExportDialog}>
 										<X />
 										<span class="sr-only">Close</span>
 									</Button>
@@ -288,22 +288,20 @@
 										There will eventually be support for Markdown, so be on the look-out for that.
 									</p>
 								</main>
-								<footer
-									class="w-full p-12 flex flex-col tablet:flex-row justify-center items-center gap-8"
-								>
+								<footer class="w-full flex flex-col tablet:flex-row justify-center items-center">
 									<a
 										href="/"
-										class="btn btn-ghost btn-neutral full x-12 y-8"
+										class="btn btn-ghost btn-neutral full x-24 y-12"
 										bind:this={jsonDownloadButton}
 									>
-										<span>Download JSON</span>
+										<span class="mx-auto">Download JSON</span>
 									</a>
 									<a
 										href="/"
-										class="btn btn-solid btn-neutral full x-12 y-8"
+										class="btn btn-solid btn-neutral full x-24 y-12"
 										bind:this={htmlDownloadButton}
 									>
-										<span>Download HTML</span>
+										<span class="mx-auto">Download HTML</span>
 									</a>
 								</footer>
 							</div>
@@ -311,7 +309,13 @@
 					</div>
 
 					<div>
-						<Button as="button" variant="btn-danger" padX="x-8" on:click={toggleDiscardDialog}>
+						<Button
+							as="button"
+							variant="btn-danger"
+							padX="x-12"
+							padY="y-12"
+							on:click={toggleDiscardDialog}
+						>
 							<Trash2 />
 							<span class="sr-only laptop:not-sr-only">Discard</span>
 						</Button>
@@ -321,11 +325,11 @@
 						>
 							<div
 								id="dialog-card"
-								class="w-full rounded-3xl text-black/80 dark:text-white/80 bg-white dark:bg-black relative"
+								class="w-full rounded-none text-black/80 dark:text-white/80 bg-white dark:bg-black relative"
 							>
-								<header class="w-full p-12 pl-24 flex flex-row justify-between items-center gap-24">
-									<h2 class="text-xl">Discard</h2>
-									<Button as="button" padX="x-8" on:click={toggleDiscardDialog}>
+								<header class="w-full flex flex-row justify-between items-center">
+									<h2 class="text-xl pl-24 mr-auto">Discard</h2>
+									<Button as="button" padX="x-12" padY="y-12" on:click={toggleDiscardDialog}>
 										<X />
 										<span class="sr-only">Close</span>
 									</Button>
@@ -333,20 +337,26 @@
 								<main class="w-full p-24">
 									<p>Are you sure you want to discard this note?</p>
 								</main>
-								<footer
-									class="w-full p-12 flex flex-col tablet:flex-row justify-center items-center gap-8"
-								>
-									<Button as="button" width="full" on:click={toggleDiscardDialog}>
-										<span>No, it's okay</span>
+								<footer class="w-full flex flex-col tablet:flex-row justify-center items-center">
+									<Button
+										as="button"
+										width="full"
+										padX="x-24"
+										padY="y-12"
+										on:click={toggleDiscardDialog}
+									>
+										<span class="mx-auto">No, it's okay</span>
 									</Button>
 									<Button
 										as="button"
 										style="btn-solid"
 										variant="btn-danger"
 										width="full"
+										padX="x-24"
+										padY="y-12"
 										on:click={discardEditorContent}
 									>
-										<span>Yes, discard</span>
+										<span class="mx-auto">Yes, discard</span>
 									</Button>
 								</footer>
 							</div>
