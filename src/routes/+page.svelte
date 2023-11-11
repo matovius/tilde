@@ -31,7 +31,7 @@
 			<h2 class="text-center text-4xl font-medium text-black/60 dark:text-white/60">
 				The minimal web-based text editor
 			</h2>
-			<Button as="link" url="/edit" variant="btn-primary" style="btn-solid">
+			<Button as="link" url="/app" variant="btn-primary" style="btn-solid">
 				<span>Get Started</span>
 				<ArrowRight />
 			</Button>
