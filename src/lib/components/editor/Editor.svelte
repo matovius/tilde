@@ -36,9 +36,6 @@
 	let htmlDownloadButton: HTMLAnchorElement;
 	let jsonDownloadButton: HTMLAnchorElement;
 
-	let uploadDialog: HTMLDialogElement;
-	let uploadDialogOpen: boolean = false;
-
 	let discardDialog: HTMLDialogElement;
 	let discardDialogOpen: boolean = false;
 
@@ -62,16 +59,6 @@
 		} else {
 			downloadDialog.close();
 			downloadDialogOpen = false;
-		}
-	}
-
-	function toggleUploadDialog() {
-		if (!uploadDialogOpen) {
-			uploadDialogOpen = true;
-			uploadDialog.showModal();
-		} else {
-			uploadDialog.close();
-			uploadDialogOpen = false;
 		}
 	}
 
@@ -277,67 +264,6 @@
 					class="w-full tablet:w-fit tablet:h-full flex flex-row tablet:flex-col justify-between items-center laptop:items-start"
 				>
 					<div class="w-fit tablet:w-full flex flex-row tablet:flex-col justify-start items-center">
-						<div class="w-full">
-							<Button
-								as="button"
-								padX="x-12"
-								padY="y-12"
-								width="full"
-								on:click={toggleUploadDialog}
-							>
-								<Upload />
-								<span class="sr-only laptop:not-sr-only">Upload</span>
-							</Button>
-							<dialog
-								bind:this={uploadDialog}
-								class="w-full max-w-lg p-24 bg-transparent backdrop:bg-black/50 backdrop:backdrop-blur"
-							>
-								<div
-									id="dialog-card"
-									class="w-full rounded-none text-black/80 dark:text-white/80 bg-white dark:bg-black relative"
-								>
-									<header class="w-full flex flex-row justify-between items-center">
-										<h2 class="text-xl pl-24 mr-auto">Upload</h2>
-										<Button as="button" padX="x-12" padY="y-12" on:click={toggleUploadDialog}>
-											<X />
-											<span class="sr-only">Close</span>
-										</Button>
-									</header>
-									<main class="w-full p-24 flex flex-col gap-24">
-										<p>
-											As of now, you can only upload HTML and JSON files. It's recommended to use
-											HTML because JSON might get parsed incorrectly if it's not formatted in a way
-											that the editor recognizes.
-										</p>
-										<p>
-											You will eventually be able to upload Markdown files for easier portability.
-										</p>
-									</main>
-									<footer class="w-full flex flex-col tablet:flex-row justify-center items-center">
-										<Button
-											as="button"
-											width="full"
-											padX="x-24"
-											padY="y-12"
-											on:click={toggleUploadDialog}
-										>
-											<span class="mx-auto">JSON</span>
-										</Button>
-										<Button
-											as="button"
-											style="btn-solid"
-											variant="btn-neutral"
-											width="full"
-											padX="x-24"
-											padY="y-12"
-											on:click={toggleUploadDialog}
-										>
-											<span class="mx-auto">HTML</span>
-										</Button>
-									</footer>
-								</div>
-							</dialog>
-						</div>
 						<div class="w-full">
 							<Button as="button" padX="x-12" padY="y-12" width="full" on:click={getEditorContent}>
 								<Download />
